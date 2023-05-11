@@ -6,7 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   currentPage: number = 0;
+
+  onClickPrev() {
+    this.currentPage--;
+  }
+  onClickNext() {
+    this.currentPage++;
+  }
+
   images = [
     {
       title: 'at the beach',
