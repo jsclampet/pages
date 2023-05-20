@@ -6,14 +6,16 @@
     >
       <a href="#" class="page-link" (click)="currentPage = currentPage - 1">Prev</a>
     </li>
-    <li 
-      class="page-item"
-      [ngClass]="{ active: i === currentPage }"
-      *ngFor="let image of images; let i = index;"
-    >
-      <a href="#" class="page-link" (click)="currentPage = i">{{ i + 1 }}</a>
-      <img alt="">
-    </li>
+    <ng-container *ngFor="let image of images; let i = index;">
+      <li 
+        class="page-item"
+        [ngClass]="{ active: i === currentPage }"
+        *ngIf="checkWindowIndex(i)"
+      >
+        <a href="#" class="page-link" (click)="currentPage = i">{{ i + 1 }}</a>
+        <img alt="">
+      </li>
+    </ng-container>
     <li 
       class="page-item"
       [ngClass]="{ disabled: currentPage === images.length-1 }"
@@ -23,4 +25,19 @@
   </ul>
 </nav>
 
-{{ currentPage }}
+<div>
+  <h4 appClass [backgroundColor]="  'yellow'  ">{{ images[currentPage].title }}</h4>
+  <img [src]="images[currentPage].url" alt="">
+</div>
+
+<div [ngSwitch]="currentPage">
+  <div *ngSwitchCase="0">
+    Current Page Is Zero
+  </div>
+  <div *ngSwitchCase="1">
+    Current Page Is 1
+  </div>
+  <div *ngSwitchDefault>
+    Current Page Is Default
+  </div>
+</div>
